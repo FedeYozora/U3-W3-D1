@@ -11,7 +11,7 @@ export class HomeComponent {
   allProducts!: Product[];
   cart: Product[] = [];
   favourites: Product[] = [];
-  addButton: string = 'Add To Cart';
+  addButton: string = 'Rimuovi dal Carrello';
   favouriteButton: string = 'Aggiungi ai Preferiti';
 
   constructor(private productService: ProductService) {}
@@ -24,12 +24,19 @@ export class HomeComponent {
   }
 
   addToCart(product: Product) {
-    if (this.cart.includes(product)) {
-      this.cart = this.cart.filter((prod) => prod !== product);
-    } else {
-      this.cart.push(product);
-      this.addButton = 'Rimuovi dal Carrello';
-    }
+    this.cart.push(product);
+  }
+
+  removeCart(product: Product) {
+    this.cart = this.cart.filter((prod) => prod !== product);
+  }
+
+  calculateTotalPrice() {
+    let totalPrice = 0;
+    this.cart.forEach((item) => {
+      totalPrice += item.price;
+    });
+    return totalPrice;
   }
 
   addToFavourites(product: Product) {

@@ -12,10 +12,7 @@
           <h5 class="card-title">{{ product.title }}</h5>
           <p class="card-text">{{ product.description }}</p>
           <div class="d-flex justify-content-between">
-            <a
-              *ngIf="!cart.includes(product)"
-              class="btn btn-primary"
-              (click)="addToCart(product)"
+            <a class="btn btn-primary" (click)="addToCart(product)"
               >{{ product.price }} $</a
             >
             <a
@@ -31,6 +28,7 @@
   </div>
   <div class="col-4">
     <h2 class="text-center">Carrello</h2>
+    <h4>Totale: {{ calculateTotalPrice() }} $</h4>
     <div *ngFor="let product of cart" class="card">
       <div class="card-body d-flex flex-column justify-content-between">
         <h5 class="card-title">{{ product.title }}</h5>
@@ -38,7 +36,7 @@
         <p class="card-text">Marca: {{ product.brand }}</p>
         <p class="card-text">Categoria: {{ product.category }}</p>
         <div class="d-flex justify-content-evenly">
-          <a class="btn btn-danger" (click)="addToCart(product)">{{
+          <a class="btn btn-danger" (click)="removeCart(product)">{{
             addButton
           }}</a>
           <a class="btn btn-primary" (click)="addToFavourites(product)">{{
