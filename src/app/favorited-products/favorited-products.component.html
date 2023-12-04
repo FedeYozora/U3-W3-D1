@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="col">
+    <h2 class="text-center">Oggetti Preferiti</h2>
+    <ng-container *ngIf="favourites.length > 0; else empty">
+      <div class="row row-cols-3">
+        <div *ngFor="let product of favourites" class="card">
+          <img
+            src="{{ product.thumbnail }}"
+            class="card-img-top"
+            alt="{{ product.title }}"
+          />
+          <div class="card-body d-flex flex-column justify-content-between">
+            <h5 class="card-title">{{ product.title }}</h5>
+            <p class="card-text">{{ product.description }}</p>
+            <p class="card-text">Prezzo: {{ product.price }} $</p>
+            <div class="d-flex justify-content-evenly"></div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <ng-template #empty>
+      <h4 class="text-center">Nessun oggetto preferito!</h4>
+    </ng-template>
+  </div>
+</div>
