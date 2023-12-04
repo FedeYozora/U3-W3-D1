@@ -9,10 +9,25 @@ import { ProductService } from '../services/product.service';
 })
 export class FavoritedProductsComponent {
   favourites: Product[] = [];
+  favouriteButton: string = 'Rimuovi dai Preferiti';
 
   constructor(private productService: ProductService) {}
 
   ngOnInit() {
     this.favourites = this.productService.favourites;
+  }
+
+  addToFavourites(product: Product) {
+    if (this.productService.favourites.includes(product)) {
+      this.productService.favourites = this.productService.favourites.filter(
+        (prod) => prod != product
+      );
+      this.favourites = this.productService.favourites;
+      this.favouriteButton = 'Aggiungi ai Preferiti';
+    } else {
+      this.productService.favourites.push(product);
+      this.favourites = this.productService.favourites;
+      this.favouriteButton = 'Rimuovi dai Preferiti';
+    }
   }
 }
